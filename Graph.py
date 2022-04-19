@@ -27,12 +27,12 @@ class Graph:
     def printAdjacencyMatrix(self):
         print('', end='\t')
         for i in range(self.vertexCount):
-            print(f'{i}', end='\t\t')
+            print(f'{i}'.rjust(10), end=' ')
         print('')
         for i in range(self.vertexCount):
             print(i, end='\t')
             for j in range(self.vertexCount):
-                print(self.adjacencyMatrix[i][j], end='\t\t')
+                print(str(self.adjacencyMatrix[i][j]).rjust(10), end=' ')
             print('')
 
     def printEdgeList(self):
