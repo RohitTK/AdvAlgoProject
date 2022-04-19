@@ -13,3 +13,24 @@ Expected Input: A weighted complete graph
 Expected Output: A cycle of vertices/edges corresponding to the Travelling Salesman Problem.
 
 """
+
+from Graph import Graph
+
+# Loading the graph from the file
+inputGraph = Graph()
+inputGraph.loadGraphFromFile(r"Input files\input.txt")
+# inputGraph.loadGraphFromFile(r"Input files\input2.txt")
+
+# Printing the graph and edge list
+# inputGraph.printAdjMatrix()
+print("The edge list: ")
+inputGraph.printEdgeList()
+
+
+MST=inputGraph.getMinimumSpanningTree()
+print("\nMinimum Spanning Tree: ")
+print(MST)
+
+
+#Using DFS to get the path in MST
+#calculate the total weight of MST
