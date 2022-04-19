@@ -13,3 +13,25 @@ Step 5: Return the list A
 Expected Input: Weighted Graph
 Expected Output: An independent acyclic set of edges of a graphic matroid.
 """
+from Graph import Graph
+
+# Take an empty list
+independentSet = {}
+
+# Loading the graph from the file
+inputGraph = Graph()
+inputGraph.loadGraphFromFile(r"Input files\input2.txt")
+
+# Printing the graph and edge list
+inputGraph.printAdjMatrix()
+inputGraph.printEdgeList()
+
+# Sorting the weights in non-increasing order
+sorted_edges = dict(sorted(inputGraph.edgeList.items(), key=lambda x: x[1], reverse=True))
+
+print(f"After sorting:\n{sorted_edges}")
+
+for edge, weight in sorted_edges.items():
+    independentSet[edge] = weight
+
+print(independentSet)
