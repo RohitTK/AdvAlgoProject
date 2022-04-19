@@ -23,7 +23,7 @@ inputGraph = Graph()
 inputGraph.loadGraphFromFile(r"Input files\input2.txt")
 
 # Printing the graph and edge list
-inputGraph.printAdjMatrix()
+inputGraph.printAdjacencyMatrix()
 inputGraph.printEdgeList()
 
 # Sorting the weights in non-increasing order
