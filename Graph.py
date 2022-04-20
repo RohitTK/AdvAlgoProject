@@ -1,5 +1,6 @@
 from DisjointSet import DisjointSet
 
+
 class Graph:
     def __init__(self, vertexCount=0):
         self.vertexCount = vertexCount
@@ -38,14 +39,19 @@ class Graph:
     def printEdgeList(self):
         print(str(self.edgeList))
 
-    def getMinimumSpanningTree(self):
+    def getMinimumSpanningTree(self, customVertices=None):
         edgeCount = 0
         minimumSpanningTree = {}
 
-        ds = DisjointSet(self.vertexList)
+        ds = DisjointSet(customVertices) if customVertices else DisjointSet(self.vertexList)
 
         # Sorting the weights in non-increasing order
         sorted_edges = dict(sorted(self.edgeList.items(), key=lambda x: x[1]))
+
+        if customVertices:
+            for key, value in self.edgeList.items():
+                if key[0] not in customVertices or key[1] not in customVertices:
+                    sorted_edges.pop(key)
 
         for key, value in sorted_edges.items():
             vertexU = key[0]
@@ -61,3 +67,16 @@ class Graph:
                 ds.union(mainParentU, mainParentV)
 
         return minimumSpanningTree
+
+    def getDFS(self, start=0, dfs_path=None, visited_vertices=None):
+        if visited_vertices is None:
+            visited_vertices = []
+        if dfs_path is None:
+            dfs_path = {}
+
+        visited_vertices.append(start)
+
+        for i in range(self.vertexCount):
+            if self.adjacencyMatrix[start][i] != 0 and i not in visited_vertices:
+                dfs_path[(start, i)] = self.adjacencyMatrix[start][i]
+                self.getDFS(i, dfs_path, visited_vertices)

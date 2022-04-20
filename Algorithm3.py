@@ -15,13 +15,13 @@ from Graph import Graph
 
 # Loading the graph from the file
 inputGraph = Graph()
-inputGraph.loadGraphFromFile(r"Input files\input.txt")
-# inputGraph.loadGraphFromFile(r"Input files\input2.txt")
+# inputGraph.loadGraphFromFile(r"Input files\input.txt")
+inputGraph.loadGraphFromFile(r"Input files\input2.txt")
 
 # Printing the graph and edge list
 # inputGraph.printAdjMatrix()
 print("The edge list: ")
 inputGraph.printEdgeList()
 
-print("\nMinimum Spanning Tree: ")
+# print("\nMinimum Spanning Tree: ")
 print(inputGraph.getMinimumSpanningTree())
