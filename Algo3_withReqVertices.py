@@ -13,6 +13,8 @@ Expected Output: Edge list of a Steiner Tree
 
 from itertools import combinations
 
+from Graph import Graph
+
 required_vertices_path = r'Input files/required_vertices.txt'
 input_graph_path = r'Input files/input2.txt'
 
@@ -37,10 +39,36 @@ print("Steiner list:- " + str(steiner_list))
 
 # getting combination of steiner vertices
 combination_of_steiner_vertices = []
-com = [c for i in range(len(steiner_list)) for c in combinations(steiner_list, i + 1)]
+com = [list(c) for i in range(len(steiner_list)) for c in combinations(steiner_list, i + 1)]
 print("combination of steiner vertices are:-" + str(com))
 # need to right trim to eliminate the , at the end
 
+inputGraph = Graph()
+inputGraph.loadGraphFromFile(r"Input files\input2.txt")
+
+least_cost = 9999
+least_spanning_tree = {}
+vertices_used = []
+
+for steiner_vertices in com:
+    total_vertices = required_vertices + steiner_vertices
+    print("Spanning tree for the vertices ", total_vertices, "is:")
+    spanning_tree = inputGraph.getMinimumSpanningTree(total_vertices)
+    print(spanning_tree)
+    total_cost = sum(spanning_tree.values())
+    print("Total cost = ", total_cost, "\n")
+    if least_cost > total_cost:
+        least_cost = total_cost
+        vertices_used = total_vertices
+        least_spanning_tree = spanning_tree
+
+print("Vertices used for the Steiner Tree: ", vertices_used,
+      "\nSteiner vertices used:", list(set(vertices_used) - set(required_vertices)))
+
+print("The Steiner tree:")
+print(least_spanning_tree)
+
+print("Total Cost = ", least_cost)
 
 """
 Algorithm 3:
