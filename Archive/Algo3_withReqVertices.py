@@ -15,8 +15,8 @@ from itertools import combinations
 
 from Graph import Graph
 
-required_vertices_path = r'Input files/required_vertices.txt'
-input_graph_path = r'Input files/input2.txt'
+required_vertices_path = r'../Input files/required_vertices.txt'
+input_graph_path = r'../Input files/input2.txt'
 
 # reading input data
 graph_data = open(input_graph_path)
