@@ -43,6 +43,5 @@ print("\nEuler Tour: ")
 euler.get_DFS(dfs_path=dfs_path, visited_vertices=visited_vertices)
 
 print(visited_vertices)
-print(dfs_path)
+# print(dfs_path)
 print("Total cost = ", sum(dfs_path.values()))
-

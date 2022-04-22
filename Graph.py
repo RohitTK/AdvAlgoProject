@@ -34,7 +34,7 @@ class Graph:
     def print_adjacency_matrix(self):
         print('', end='\t')
         for i in range(self.vertex_count):
-            print(f'{i}'.rjust(10), end=' ')
+            print(str(i).rjust(10), end=' ')
         print('')
         for i in range(self.vertex_count):
             print(i, end='\t')
@@ -87,3 +87,9 @@ class Graph:
             if self.adjacency_matrix[start][i] != 0 and i not in visited_vertices:
                 dfs_path[(start, i)] = self.adjacency_matrix[start][i]
                 self.get_DFS(i, dfs_path, visited_vertices)
+
+        if len(visited_vertices) == self.vertex_count:
+            visited_vertices.append(visited_vertices[0])
+            # Doubling the edges
+            for i in dfs_path:
+                dfs_path[i] = dfs_path[i] * 2

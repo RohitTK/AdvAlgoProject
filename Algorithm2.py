@@ -5,7 +5,8 @@ Algorithm Steps:
 
 Step 1: For the given graph input, a new complete graph needs to be created where
         the cost of edge (u,v) needs to be the shortest u-v path. (Metric Closure)
-Step 2: To find the shortest path, we can use the Dijkstra algorithm.
+Step 2: Computing the shortest path for all pairs of vertices and updating the graph
+        to get the graph satisfying triangle inequality
 
 Expected Input: Weighted Graph and Required Vertices
 Expected Output: A complete weighted graph (Satisfying triangle inequality) and a set of required vertices
@@ -15,7 +16,7 @@ import sys
 from Graph import Graph
 
 
-input_graph_path = r'Input files/weighted_graph_steiner.txt'
+input_graph_path = r'Input files/weighted_graph.txt'
 # input_graph_path = r'Input files/input2.txt'
 required_vertices_path = r'Input files/required_vertices.txt'
 
@@ -23,15 +24,15 @@ file_data = open(required_vertices_path)
 
 required_vertices = [int(i) for i in file_data.readlines()[0].split(" ")]
 
-print("The required vertices are:", required_vertices)
+# print("The required vertices are:", required_vertices)
 
 input_graph = Graph()
 input_graph.load_graph_from_file(input_graph_path)
 
-print("The adjacency matrix for the input Graph")
+print("The edge list for the input Graph")
 
 input_graph.print_edge_list()
-input_graph.print_adjacency_matrix()
+# input_graph.print_adjacency_matrix()
 
 
 def get_minimum_vertex(mst, key):
@@ -71,8 +72,8 @@ output_graph = Graph(vertex_count=input_graph.vertex_count)
 for source_vertex in input_graph.vertex_list:
     compute_shortest_path(src_vertex=source_vertex, in_graph=input_graph, out_graph=output_graph)
 
-print("\nThe adjacency matrix for complete weighted graph is: ")
-output_graph.print_adjacency_matrix()
+# print("\nThe adjacency matrix for complete weighted graph is: ")
+# output_graph.print_adjacency_matrix()
 
 print("\nThe edge list for complete weighted graph is: ")
 output_graph.print_edge_list()
