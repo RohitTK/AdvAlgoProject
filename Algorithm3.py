@@ -18,12 +18,12 @@ from Graph import Graph
 required_vertices_path = r'Input files/required_vertices.txt'
 input_graph_path = r'Input files/input2.txt'
 
-inputGraph = Graph()
-inputGraph.loadGraphFromFile(r"Input files\input2.txt")
+input_graph = Graph()
+input_graph.load_graph_from_file(r"Input files\input2.txt")
 
-print("Total number of vertices in the graph:-", inputGraph.vertexCount)
+print("Total number of vertices in the graph:-", input_graph.vertex_count)
 
-print("vertex list:- ", inputGraph.vertexList)
+print("vertex list:- ", input_graph.vertex_list)
 
 # reading required vertices data
 file_data = open(required_vertices_path)
@@ -31,16 +31,16 @@ required_vertices = [int(i) for i in file_data.readlines()[0].split(" ")]
 print("The required vertices are:", required_vertices)
 
 # getting Steiner vertices by removing required vertices from all vertices
-steiner_list = list(set(inputGraph.vertexList) - set(required_vertices))
+steiner_list = list(set(input_graph.vertex_list) - set(required_vertices))
 print("Steiner list:- " + str(steiner_list))
 
 # getting combination of steiner vertices
-combination_of_steiner_vertices = []
-com = [list(c) for i in range(len(steiner_list)) for c in combinations(steiner_list, i + 1)]
-print("combination of steiner vertices are:-" + str(com))
+combination_of_steiner_vertices = [list(c) for i in range(len(steiner_list))
+                                   for c in combinations(steiner_list, i + 1)]
+print("combination of steiner vertices are:-" + str(combination_of_steiner_vertices))
 
 # Initialization
-least_spanning_tree = inputGraph.getMinimumSpanningTree(required_vertices)
+least_spanning_tree = input_graph.get_minimum_spanning_tree(required_vertices)
 least_cost = sum(least_spanning_tree.values())
 vertices_used = required_vertices
 
@@ -48,10 +48,10 @@ print("Spanning tree for the vertices", required_vertices, "is:")
 print(least_spanning_tree)
 print("Total cost = ", least_cost, "\n")
 
-for steiner_vertices in com:
+for steiner_vertices in combination_of_steiner_vertices:
     total_vertices = required_vertices + steiner_vertices
     print("Spanning tree for the vertices", total_vertices, "is:")
-    spanning_tree = inputGraph.getMinimumSpanningTree(total_vertices)
+    spanning_tree = input_graph.get_minimum_spanning_tree(total_vertices)
     print(spanning_tree)
     total_cost = sum(spanning_tree.values())
     print("Total cost =", total_cost, "\n")

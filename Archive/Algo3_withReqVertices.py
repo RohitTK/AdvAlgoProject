@@ -44,10 +44,10 @@ print("combination of steiner vertices are:-" + str(com))
 # need to right trim to eliminate the , at the end
 
 inputGraph = Graph()
-inputGraph.loadGraphFromFile(r"Input files\input2.txt")
+inputGraph.load_graph_from_file(r"Input files\input2.txt")
 
 
-least_spanning_tree = inputGraph.getMinimumSpanningTree(required_vertices)
+least_spanning_tree = inputGraph.get_minimum_spanning_tree(required_vertices)
 least_cost = sum(least_spanning_tree.values())
 vertices_used = required_vertices
 
@@ -58,7 +58,7 @@ print("Total cost = ", least_cost, "\n")
 for steiner_vertices in com:
     total_vertices = required_vertices + steiner_vertices
     print("Spanning tree for the vertices ", total_vertices, "is:")
-    spanning_tree = inputGraph.getMinimumSpanningTree(total_vertices)
+    spanning_tree = inputGraph.get_minimum_spanning_tree(total_vertices)
     print(spanning_tree)
     total_cost = sum(spanning_tree.values())
     print("Total cost = ", total_cost, "\n")

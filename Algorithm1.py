@@ -17,39 +17,39 @@ from Graph import Graph
 from DisjointSet import DisjointSet
 
 # Take an empty list
-independentSet = {}
+independent_set = {}
 
 # Loading the graph from the file
-inputGraph = Graph()
-inputGraph.loadGraphFromFile(r"Input files\input.txt")
-# inputGraph.loadGraphFromFile(r"Input files\input2.txt")
+input_graph = Graph()
+input_graph.load_graph_from_file(r"Input files\input.txt")
+# input_graph.load_graph_from_file(r"Input files\input2.txt")
 
 # Printing the graph and edge list
-# inputGraph.printAdjMatrix()
+# input_graph.printAdjMatrix()
 print("The edge list: ")
-inputGraph.printEdgeList()
+input_graph.print_edge_list()
 
-edgeCount = 0
+edge_count = 0
 
-ds = DisjointSet(inputGraph.vertexList)
+ds = DisjointSet(input_graph.vertex_list)
 
 # Sorting the weights in non-increasing order
-sorted_edges = dict(sorted(inputGraph.edgeList.items(), key=lambda x: x[1], reverse=True))
+sorted_edges = dict(sorted(input_graph.edge_list.items(), key=lambda x: x[1], reverse=True))
 
 print(f"\nAfter sorting based on weights:\n{sorted_edges}")
 
 for key, value in sorted_edges.items():
-    vertexU = key[0]
-    vertexV = key[1]
+    vertex_u = key[0]
+    vertex_v = key[1]
     weight = value
 
-    mainParentU = ds.find(vertexU)
-    mainParentV = ds.find(vertexV)
+    main_parent_u = ds.find(vertex_u)
+    main_parent_v = ds.find(vertex_v)
 
-    if mainParentU != mainParentV:
-        edgeCount += 1
-        independentSet[(vertexU, vertexV)] = weight
-        ds.union(mainParentU, mainParentV)
+    if main_parent_u != main_parent_v:
+        edge_count += 1
+        independent_set[(vertex_u, vertex_v)] = weight
+        ds.union(main_parent_u, main_parent_v)
 
 print("\nThe maximum weight independent set in a graphic matroid: ")
-print(independentSet)
+print(independent_set)

@@ -22,55 +22,55 @@ required_vertices = [int(i) for i in file_data.readlines()[0].split(" ")]
 
 print("The required vertices are:", required_vertices)
 
-inputGraph = Graph()
-inputGraph.loadGraphFromFile(input_graph_path)
+input_graph = Graph()
+input_graph.load_graph_from_file(input_graph_path)
 
 print("The adjacency matrix for the input Graph")
 
-inputGraph.printEdgeList()
-inputGraph.printAdjacencyMatrix()
+input_graph.print_edge_list()
+input_graph.print_adjacency_matrix()
 
 
-def getMinimumVertex(mst, key):
-    minKey = 9999
+def get_minimum_vertex(mst, key):
+    min_key = 9999
     vertex = -1
-    for i in range(inputGraph.vertexCount):
-        if not mst[i] and minKey > key[i]:
-            minKey = key[i]
+    for i in range(input_graph.vertex_count):
+        if not mst[i] and min_key > key[i]:
+            min_key = key[i]
             vertex = i
     return vertex
 
 
-def dijkstra(srcVertex, outputGraph):
-    spt = [0 for i in range(inputGraph.vertexCount)]
-    distance = [9999 for i in range(inputGraph.vertexCount)]
+def dijkstra(src_vertex, output_graph):
+    spt = [0 for _ in range(input_graph.vertex_count)]
+    distance = [9999 for _ in range(input_graph.vertex_count)]
 
-    distance[srcVertex] = 0
+    distance[src_vertex] = 0
 
-    for i in range(inputGraph.vertexCount):
-        vertexU = getMinimumVertex(spt, distance)
-        spt[vertexU] = True
+    for i in range(input_graph.vertex_count):
+        vertex_u = get_minimum_vertex(spt, distance)
+        spt[vertex_u] = True
 
-        for vertexV in range(inputGraph.vertexCount):
-            if inputGraph.adjacencyMatrix[vertexU][vertexV] > 0:
-                if not spt[vertexV] and inputGraph.adjacencyMatrix[vertexU][vertexV] != 9999:
-                    sum = inputGraph.adjacencyMatrix[vertexU][vertexV] + distance[vertexU]
-                    if sum < distance[vertexV]:
-                        distance[vertexV] = sum
+        for vertex_v in range(input_graph.vertex_count):
+            if input_graph.adjacency_matrix[vertex_u][vertex_v] > 0:
+                if not spt[vertex_v] and input_graph.adjacency_matrix[vertex_u][vertex_v] != 9999:
+                    sum = input_graph.adjacency_matrix[vertex_u][vertex_v] + distance[vertex_u]
+                    if sum < distance[vertex_v]:
+                        distance[vertex_v] = sum
 
-    for i in range(inputGraph.vertexCount):
-        outputGraph.addEdge(srcVertex, i, distance[i])
+    for i in range(input_graph.vertex_count):
+        output_graph.add_edge(src_vertex, i, distance[i])
 
 
-outputGraph = Graph(vertexCount=inputGraph.vertexCount)
+output_graph = Graph(vertex_count=input_graph.vertex_count)
 
-for srcVertex in inputGraph.vertexList:
-    dijkstra(srcVertex, outputGraph)
+for srcVertex in input_graph.vertex_list:
+    dijkstra(srcVertex, output_graph)
 
 print("\nThe adjacency matrix for complete weighted graph is: ")
-outputGraph.printAdjacencyMatrix()
+output_graph.print_adjacency_matrix()
 
 print("\nThe edge list for complete weighted graph is: ")
-outputGraph.printEdgeList()
+output_graph.print_edge_list()
 
 print("\nThe required vertices are:", required_vertices)

@@ -1,10 +1,8 @@
 class DisjointSet:
     def __init__(self, vertices):
         self.vertices = vertices
-        self.parent = {}
-        for v in vertices:
-            self.parent[v] = v
-        self.rank = dict.fromkeys(vertices, 0)
+        self.parent = {i: i for i in vertices}
+        self.rank = {i: 0 for i in vertices}
 
     def find(self, item):
         if self.parent[item] == item:

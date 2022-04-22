@@ -20,14 +20,14 @@ independentSet = {}
 
 # Loading the graph from the file
 inputGraph = Graph()
-inputGraph.loadGraphFromFile(r"Input files\input2.txt")
+inputGraph.load_graph_from_file(r"Input files\input2.txt")
 
 # Printing the graph and edge list
-inputGraph.printAdjacencyMatrix()
-inputGraph.printEdgeList()
+inputGraph.print_adjacency_matrix()
+inputGraph.print_edge_list()
 
 # Sorting the weights in non-increasing order
-sorted_edges = dict(sorted(inputGraph.edgeList.items(), key=lambda x: x[1], reverse=True))
+sorted_edges = dict(sorted(inputGraph.edge_list.items(), key=lambda x: x[1], reverse=True))
 
 print(f"After sorting:\n{sorted_edges}")
 
