@@ -75,7 +75,7 @@ class Graph:
         return minimum_spanning_tree
 
     # Get DFS for the passed graph
-    def get_DFS(self, start=0, dfs_path=None, visited_vertices=None):
+    def get_DFS(self, start=0, dfs_path=None, visited_vertices=None, double_edges_flag=False):
         if visited_vertices is None:
             visited_vertices = []
         if dfs_path is None:
@@ -86,10 +86,14 @@ class Graph:
         for i in range(self.vertex_count):
             if self.adjacency_matrix[start][i] != 0 and i not in visited_vertices:
                 dfs_path[(start, i)] = self.adjacency_matrix[start][i]
-                self.get_DFS(i, dfs_path, visited_vertices)
+                self.get_DFS(i, dfs_path, visited_vertices, double_edges_flag)
 
         if len(visited_vertices) == self.vertex_count:
-            visited_vertices.append(visited_vertices[0])
             # Doubling the edges
-            for i in dfs_path:
-                dfs_path[i] = dfs_path[i] * 2
+            if double_edges_flag:
+                visited_vertices.append(visited_vertices[0])
+                for i in dfs_path:
+                    dfs_path[i] = dfs_path[i] * 2
+            else:
+                dfs_path[(visited_vertices[-1], visited_vertices[0])] = self.adjacency_matrix[visited_vertices[-1]][visited_vertices[0]]
+                visited_vertices.append(visited_vertices[0])

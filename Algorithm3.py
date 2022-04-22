@@ -16,7 +16,7 @@ from itertools import combinations
 from Graph import Graph
 
 required_vertices_path = r'Input files/required_vertices.txt'
-input_graph_path = r'Input files/weighted_graph_steiner.txt'
+input_graph_path = r'Input files/weighted_graph.txt'
 
 input_graph = Graph()
 input_graph.load_graph_from_file(input_graph_path)

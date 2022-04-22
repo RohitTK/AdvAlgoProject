@@ -40,7 +40,7 @@ visited_vertices = []
 dfs_path = {}
 
 print("\nEuler Tour: ")
-euler.get_DFS(dfs_path=dfs_path, visited_vertices=visited_vertices)
+euler.get_DFS(dfs_path=dfs_path, visited_vertices=visited_vertices, double_edges_flag=True)
 
 print(visited_vertices)
 # print(dfs_path)

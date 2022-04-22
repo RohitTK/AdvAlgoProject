@@ -20,7 +20,7 @@ from Graph import Graph
 
 # Loading the graph from the file
 input_graph = Graph()
-# inputGraph.load_graph_from_file(r"Input files\input.txt")
+# input_graph.load_graph_from_file(r"Input files\input.txt")
 input_graph.load_graph_from_file(r"Input files\weighted_graph.txt")
 
 # Printing the graph and edge list
@@ -106,4 +106,5 @@ euler.get_DFS(dfs_path=dfs_path, visited_vertices=visited_vertices)
 # print(dfs_path)
 print(visited_vertices)
 
+# print(dfs_path)
 print("Total cost = ", sum(dfs_path.values()))
