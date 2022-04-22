@@ -39,7 +39,7 @@ mst = Graph(input_graph.vertex_count)
 for edge, weight in mst_list.items():
     mst.add_edge(vertex1=edge[0], vertex2=edge[1], weight=weight)
 
-mst.print_adjacency_matrix()
+# mst.print_adjacency_matrix()
 
 for i in range(mst.vertex_count):
     count = 0  # for degree of each vertex
@@ -93,8 +93,9 @@ print("\nMinimum Cost Perfect Matching:", minimum_cost_perfect_matching, "with c
 for edge in minimum_cost_perfect_matching:
     euler.add_edge(vertex1=edge[0], vertex2=edge[1], weight=min_cost)
 
-
-euler.print_adjacency_matrix()
+print("\nThe edge list after adding the minimum cost matching pair")
+euler.print_edge_list()
+# euler.print_adjacency_matrix()
 
 visited_vertices = []
 dfs_path = {}
@@ -102,7 +103,7 @@ dfs_path = {}
 print("\nEuler Tour: ")
 euler.get_DFS(dfs_path=dfs_path, visited_vertices=visited_vertices)
 
-print(dfs_path)
+# print(dfs_path)
 print(visited_vertices)
 
 print("Total cost = ", sum(dfs_path.values()))
