@@ -14,14 +14,14 @@ Expected Input: A weighted complete graph
 Expected Output: A cycle of vertices/edges corresponding to the Travelling Salesman Problem.
 
 """
-
+import sys
 from itertools import combinations
 from Graph import Graph
 
 # Loading the graph from the file
 input_graph = Graph()
 # inputGraph.load_graph_from_file(r"Input files\input.txt")
-input_graph.load_graph_from_file(r"Input files\input2.txt")
+input_graph.load_graph_from_file(r"Input files\weighted_graph.txt")
 
 # Printing the graph and edge list
 print("The edge list: ")
@@ -56,7 +56,7 @@ for ((vertex1, vertex2), weight) in mst.items():
 
 # Computing minimum cost perfect matching
 minimum_cost_perfect_matching = []
-min_cost = 9999
+min_cost = sys.maxsize
 
 # possible_pairs = []
 

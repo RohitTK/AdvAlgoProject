@@ -1,22 +1,25 @@
 class DisjointSet:
-    def __init__(self, vertices):
-        self.vertices = vertices
-        self.parent = {i: i for i in vertices}
-        self.rank = {i: 0 for i in vertices}
+    def __init__(self, vertex_list):
+        self.vertex_list = vertex_list
+        self.parent = {i: i for i in vertex_list}
+        self.group = {i: 0 for i in vertex_list}
 
-    def find(self, item):
-        if self.parent[item] == item:
-            return item
+    # Find the key
+    def find(self, key):
+        if self.parent[key] == key:
+            return key
         else:
-            return self.find(self.parent[item])
+            return self.find(self.parent[key])
 
-    def union(self, x, y):
-        xroot = self.find(x)
-        yroot = self.find(y)
-        if self.rank[xroot] < self.rank[yroot]:
-            self.parent[xroot] = yroot
-        elif self.rank[xroot] > self.rank[yroot]:
-            self.parent[yroot] = xroot
+    # Merge 2 datasets accordingly
+    def union(self, left, right):
+        left_set = self.find(left)
+        right_set = self.find(right)
+
+        if self.group[left_set] > self.group[right_set]:
+            self.parent[right_set] = left_set
+        elif self.group[left_set] < self.group[right_set]:
+            self.parent[left_set] = right_set
         else:
-            self.parent[yroot] = xroot
-            self.rank[xroot] += 1
+            self.group[left_set] += 1
+            self.parent[right_set] = left_set

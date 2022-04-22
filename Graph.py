@@ -8,11 +8,12 @@ class Graph:
         self.edge_list = {}
         self.vertex_list = []
 
+    # Load data from the file and store it into a graph in adjacency matrix format
     def load_graph_from_file(self, path):
         file_data = open(path)
         self.vertex_count = int(file_data.readline())
         self.adjacency_matrix = [[0] * self.vertex_count for _ in range(self.vertex_count)]
-        for line in file_data.readlines()[1:]:
+        for line in file_data.readlines():
             line = line.split(" ")
             self.add_edge(int(line[0]), int(line[1]), float(line[2]))
             if int(line[0]) not in self.vertex_list:
@@ -20,11 +21,13 @@ class Graph:
             if int(line[1]) not in self.vertex_list:
                 self.vertex_list.append(int(line[1]))
 
+    # Add edge to the graph
     def add_edge(self, vertex1, vertex2, weight):
         self.adjacency_matrix[vertex1][vertex2] = weight
         self.adjacency_matrix[vertex2][vertex1] = weight
         self.edge_list[(vertex1, vertex2)] = weight
 
+    # Pretty printing the adjacency matrix
     def print_adjacency_matrix(self):
         print('', end='\t')
         for i in range(self.vertex_count):
@@ -36,16 +39,17 @@ class Graph:
                 print(str(self.adjacency_matrix[i][j]).rjust(10), end=' ')
             print('')
 
+    # Print the edge list
     def print_edge_list(self):
         print(str(self.edge_list))
 
+    # Return minimum spanning tree
     def get_minimum_spanning_tree(self, custom_vertices=None):
-        edge_count = 0
         minimum_spanning_tree = {}
 
-        ds = DisjointSet(custom_vertices) if custom_vertices else DisjointSet(self.vertex_list)
+        disjoint_set = DisjointSet(custom_vertices) if custom_vertices else DisjointSet(self.vertex_list)
 
-        # Sorting the weights in non-increasing order
+        # Sorting the weights in non-increasing order by default
         sorted_edges = dict(sorted(self.edge_list.items(), key=lambda x: x[1]))
 
         if custom_vertices:
@@ -58,16 +62,16 @@ class Graph:
             vertex_v = key[1]
             weight = value
 
-            main_parent_u = ds.find(vertex_u)
-            main_parent_v = ds.find(vertex_v)
+            main_parent_u = disjoint_set.find(vertex_u)
+            main_parent_v = disjoint_set.find(vertex_v)
 
             if main_parent_u != main_parent_v:
-                edge_count += 1
                 minimum_spanning_tree[(vertex_u, vertex_v)] = weight
-                ds.union(main_parent_u, main_parent_v)
+                disjoint_set.union(main_parent_u, main_parent_v)
 
         return minimum_spanning_tree
 
+    # Get DFS for the passed graph
     def get_DFS(self, start=0, dfs_path=None, visited_vertices=None):
         if visited_vertices is None:
             visited_vertices = []

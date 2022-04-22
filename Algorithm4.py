@@ -18,7 +18,7 @@ from Graph import Graph
 
 # Loading the graph from the file
 input_graph = Graph()
-input_graph.load_graph_from_file(r"Input files\input.txt")
+input_graph.load_graph_from_file(r"Input files\weighted_graph.txt")
 # inputGraph.load_graph_from_file(r"Input files\input2.txt")
 
 # Printing the graph and edge list
@@ -27,13 +27,13 @@ print("The edge list: ")
 input_graph.print_edge_list()
 
 
-MST = input_graph.get_minimum_spanning_tree()
+mst = input_graph.get_minimum_spanning_tree()
 print("\nMinimum Spanning Tree: ")
-print(MST)
+print(mst)
 
 euler = Graph(input_graph.vertex_count)
 
-for edge, weight in MST.items():
+for edge, weight in mst.items():
     euler.add_edge(vertex1=edge[0], vertex2=edge[1], weight=weight)
 
 visited_vertices = []

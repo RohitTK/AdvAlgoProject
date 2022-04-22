@@ -21,7 +21,7 @@ independent_set = {}
 
 # Loading the graph from the file
 input_graph = Graph()
-input_graph.load_graph_from_file(r"Input files\input.txt")
+input_graph.load_graph_from_file(r"Input files\weighted_graph.txt")
 # input_graph.load_graph_from_file(r"Input files\input2.txt")
 
 # Printing the graph and edge list

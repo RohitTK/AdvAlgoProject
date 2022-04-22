@@ -10,11 +10,14 @@ Step 2: To find the shortest path, we can use the Dijkstra algorithm.
 Expected Input: Weighted Graph and Required Vertices
 Expected Output: A complete weighted graph (Satisfying triangle inequality) and a set of required vertices
 """
+import sys
+
 from Graph import Graph
 
-required_vertices_path = r'Input files/required_vertices.txt'
-input_graph_path = r'Input files/input.txt'
+
+input_graph_path = r'Input files/weighted_graph_steiner.txt'
 # input_graph_path = r'Input files/input2.txt'
+required_vertices_path = r'Input files/required_vertices.txt'
 
 file_data = open(required_vertices_path)
 
@@ -32,7 +35,7 @@ input_graph.print_adjacency_matrix()
 
 
 def get_minimum_vertex(mst, key):
-    min_key = 9999
+    min_key = sys.maxsize
     vertex = -1
     for i in range(input_graph.vertex_count):
         if not mst[i] and min_key > key[i]:
@@ -43,7 +46,7 @@ def get_minimum_vertex(mst, key):
 
 def dijkstra(src_vertex, output_graph):
     spt = [0 for _ in range(input_graph.vertex_count)]
-    distance = [9999 for _ in range(input_graph.vertex_count)]
+    distance = [sys.maxsize for _ in range(input_graph.vertex_count)]
 
     distance[src_vertex] = 0
 
@@ -53,7 +56,7 @@ def dijkstra(src_vertex, output_graph):
 
         for vertex_v in range(input_graph.vertex_count):
             if input_graph.adjacency_matrix[vertex_u][vertex_v] > 0:
-                if not spt[vertex_v] and input_graph.adjacency_matrix[vertex_u][vertex_v] != 9999:
+                if not spt[vertex_v] and input_graph.adjacency_matrix[vertex_u][vertex_v] != sys.maxsize:
                     sum = input_graph.adjacency_matrix[vertex_u][vertex_v] + distance[vertex_u]
                     if sum < distance[vertex_v]:
                         distance[vertex_v] = sum
