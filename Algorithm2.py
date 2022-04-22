@@ -44,31 +44,32 @@ def get_minimum_vertex(mst, key):
     return vertex
 
 
-def dijkstra(src_vertex, output_graph):
-    spt = [0 for _ in range(input_graph.vertex_count)]
-    distance = [sys.maxsize for _ in range(input_graph.vertex_count)]
+def compute_shortest_path(src_vertex, in_graph, out_graph):
+    shortest_path = [0 for _ in range(in_graph.vertex_count)]
+    distance = [sys.maxsize for _ in range(in_graph.vertex_count)]
 
     distance[src_vertex] = 0
 
-    for i in range(input_graph.vertex_count):
-        vertex_u = get_minimum_vertex(spt, distance)
-        spt[vertex_u] = True
+    for i in range(in_graph.vertex_count):
+        vertex_u = get_minimum_vertex(shortest_path, distance)
+        shortest_path[vertex_u] = 1
 
-        for vertex_v in range(input_graph.vertex_count):
-            if input_graph.adjacency_matrix[vertex_u][vertex_v] > 0:
-                if not spt[vertex_v] and input_graph.adjacency_matrix[vertex_u][vertex_v] != sys.maxsize:
-                    sum = input_graph.adjacency_matrix[vertex_u][vertex_v] + distance[vertex_u]
-                    if sum < distance[vertex_v]:
+        for vertex_v in range(in_graph.vertex_count):
+            if in_graph.adjacency_matrix[vertex_u][vertex_v] > 0:
+                if in_graph.adjacency_matrix[vertex_u][vertex_v] != sys.maxsize and not shortest_path[vertex_v]:
+                    sum = in_graph.adjacency_matrix[vertex_u][vertex_v] + distance[vertex_u]
+                    if distance[vertex_v] > sum:
                         distance[vertex_v] = sum
 
-    for i in range(input_graph.vertex_count):
-        output_graph.add_edge(src_vertex, i, distance[i])
+    for i in range(in_graph.vertex_count):
+        out_graph.add_edge(src_vertex, i, distance[i])
 
 
 output_graph = Graph(vertex_count=input_graph.vertex_count)
 
-for srcVertex in input_graph.vertex_list:
-    dijkstra(srcVertex, output_graph)
+# Compute the shortest path for each vertex
+for source_vertex in input_graph.vertex_list:
+    compute_shortest_path(src_vertex=source_vertex, in_graph=input_graph, out_graph=output_graph)
 
 print("\nThe adjacency matrix for complete weighted graph is: ")
 output_graph.print_adjacency_matrix()
