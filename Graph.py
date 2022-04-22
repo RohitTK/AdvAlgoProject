@@ -4,7 +4,8 @@ from DisjointSet import DisjointSet
 class Graph:
     def __init__(self, vertex_count=0):
         self.vertex_count = vertex_count
-        self.adjacency_matrix = [[0] * self.vertex_count for _ in range(self.vertex_count)] if vertex_count > 0 else None
+        self.adjacency_matrix = [[0] * self.vertex_count for _ in
+                                 range(self.vertex_count)] if vertex_count > 0 else None
         self.edge_list = {}
         self.vertex_list = []
 
@@ -23,9 +24,11 @@ class Graph:
 
     # Add edge to the graph
     def add_edge(self, vertex1, vertex2, weight):
-        self.adjacency_matrix[vertex1][vertex2] = weight
-        self.adjacency_matrix[vertex2][vertex1] = weight
-        self.edge_list[(vertex1, vertex2)] = weight
+        # Avoid adding edge if there is a self loop or if an edge already exists
+        if vertex1 != vertex2 and self.adjacency_matrix[vertex1][vertex2] == 0:
+            self.adjacency_matrix[vertex1][vertex2] = weight
+            self.adjacency_matrix[vertex2][vertex1] = weight
+            self.edge_list[(vertex1, vertex2)] = weight
 
     # Pretty printing the adjacency matrix
     def print_adjacency_matrix(self):

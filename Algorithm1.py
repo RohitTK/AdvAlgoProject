@@ -25,7 +25,7 @@ input_graph.load_graph_from_file(r"Input files\weighted_graph.txt")
 # input_graph.load_graph_from_file(r"Input files\input2.txt")
 
 # Printing the graph and edge list
-# input_graph.printAdjMatrix()
+# input_graph.print_adjacency_matrix()
 print("The edge list: ")
 input_graph.print_edge_list()
 
