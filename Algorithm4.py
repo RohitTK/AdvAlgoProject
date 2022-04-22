@@ -27,10 +27,22 @@ print("The edge list: ")
 inputGraph.printEdgeList()
 
 
-MST=inputGraph.getMinimumSpanningTree()
+MST = inputGraph.getMinimumSpanningTree()
 print("\nMinimum Spanning Tree: ")
 print(MST)
 
+euler = Graph(inputGraph.vertexCount)
 
-#Using DFS to get the path in MST
-#calculate the total weight of MST
+for edge, weight in MST.items():
+    euler.addEdge(vertex1=edge[0], vertex2=edge[1], weight=weight)
+
+visited_vertices = []
+dfs_path = {}
+
+print("\nEuler Tour: ")
+euler.getDFS(dfs_path=dfs_path, visited_vertices=visited_vertices)
+
+print(visited_vertices)
+print(dfs_path)
+print("Total cost = ", sum(dfs_path.values()))
+
