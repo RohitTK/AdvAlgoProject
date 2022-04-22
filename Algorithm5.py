@@ -27,19 +27,24 @@ input_graph.load_graph_from_file(r"Input files\weighted_graph.txt")
 print("The edge list: ")
 input_graph.print_edge_list()
 
-mst = input_graph.get_minimum_spanning_tree()
+mst_list = input_graph.get_minimum_spanning_tree()
 print("\nMinimum Spanning Tree: ")
-print(mst)
+print(mst_list)
 
 # for degree of each vertex
 odd_degree_vertices = []
 
-input_graph.print_adjacency_matrix()
+mst = Graph(input_graph.vertex_count)
 
-for i in range(input_graph.vertex_count):
+for edge, weight in mst_list.items():
+    mst.add_edge(vertex1=edge[0], vertex2=edge[1], weight=weight)
+
+mst.print_adjacency_matrix()
+
+for i in range(mst.vertex_count):
     count = 0  # for degree of each vertex
-    for j in range(input_graph.vertex_count):
-        if input_graph.adjacency_matrix[i][j] != 0:
+    for j in range(mst.vertex_count):
+        if mst.adjacency_matrix[i][j] != 0:
             count += 1
     # Appending to the list if odd degree
     if (count % 2) != 0:
@@ -51,7 +56,7 @@ print("\nOdd degree vertices are:", odd_degree_vertices)
 # Initializing Euler graph with MST
 euler = Graph(vertex_count=input_graph.vertex_count)
 
-for ((vertex1, vertex2), weight) in mst.items():
+for ((vertex1, vertex2), weight) in mst_list.items():
     euler.add_edge(vertex1=vertex1, vertex2=vertex2, weight=weight)
 
 # Computing minimum cost perfect matching
