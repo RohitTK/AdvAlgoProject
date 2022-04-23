@@ -9,6 +9,8 @@ Team Members:
 Input files present in the folder "Input files": weighted_graph.txt and required_vertices.txt
 ========================================================================================================================
 Note:
+-> We have implemented an adjacency matrix and the common functions in separate files called Graph.py and DisjointSet.py. 
+   So, while executing please copy the whole folder and need to run the individual python files as python3 Algorithm$.py .
 -> The output edge list is displayed in the format {(u1, v1): w1, (u2, v2): w2, (u3, v3): w3 ..... (un, vn): wn}
    where u, v are the vertices, n is the number of vertices in the graph.
 -> w is a float value that lies between 0 and 1.
